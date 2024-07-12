@@ -1,0 +1,25 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+    
+  pull_request:
+    branches:
+      - main
+      
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v4
+      
+    - name: Build Docker image for testing
+      run: docker build -f Dockerfile.dev -t drapp-test .
+
+    - name: Run tests in Docker container
+      run: docker run drapp-test npm run test
+      
