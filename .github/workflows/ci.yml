@@ -21,5 +21,7 @@ jobs:
       run: docker build -f Dockerfile.dev -t drapp-test .
 
     - name: Run tests in Docker container
-      run: docker run drapp-test npm run test
-      
+      run: docker run --name drapp-test-container drapp-test npm run test
+
+    - name: Exit
+      run: docker rm -f drapp-test-container
