@@ -16,12 +16,12 @@ jobs:
     steps:
     - name: Checkout repo
       uses: actions/checkout@v4
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
       
     - name: Build Docker image for testing
       run: docker build -f Dockerfile.dev -t drapp-test .
 
     - name: Run tests in Docker container
       run: docker run --name drapp-test-container drapp-test npm run test
-
-    - name: Exit
-      run: docker rm -f drapp-test-container
