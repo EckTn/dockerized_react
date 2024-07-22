@@ -38,4 +38,4 @@ jobs:
         install_components: app-engine-python
 
     - name: Deploy to App Engine
-      run: gcloud app deploy --quiet
+      run: gcloud app deploy --verbosity=debug
